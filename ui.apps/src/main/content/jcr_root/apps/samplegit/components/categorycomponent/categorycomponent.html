@@ -1,0 +1,63 @@
+
+<h2>Category Component</h2>
+<h2>Adding line by developer 1 vani</h2>
+<label for="category">Choose a Category:</label>
+  <select name="category" id="category">
+    <option value="health">Health</option>
+    <option value="sports">Sports</option>
+    <option value="world">World</option>
+
+  </select>
+  <label for="date-input">Select Date:</label>
+  <input type="date" id="date-input" name="date-input">
+ <button id="submit-data" onclick="getPages()">Get Pages</button>
+<div id="listofpages"></div>
+
+ <script>
+ $(document).ready(function(){
+ getPages();
+ });
+   function getPages(){
+     var category=$('#category').val();
+     var date = new Date($('#date-input').val());
+  	 var day = date.getDate();
+ 	 var month = date.getMonth() + 1;
+  	 var year = date.getFullYear();
+    if (month.toString().length == 1) {
+    month = "0" + month
+}
+if (day.toString().length == 1) {
+    day = "0" + day
+}
+var fulldate =year.toString() + "-" + month.toString() + "-" + day.toString();
+
+    $.ajax({
+        type : "GET",
+        headers : {
+					Accept : "application/json; charset=utf-8",
+					"Content-Type" : "application/json; charset=utf-8"
+				},
+        url : "/bin/categorypathbasedexample",
+        cache: false,
+         data: {
+		categoryselected:category,
+        sdate:fulldate
+		},
+        success : function(response) {
+        var values = [];
+		values = response;
+   		 for(var i = 0; i < values.length; i++){
+     	$('#listofpages').append('<p>'+values[i]+'</p>');
+     	}
+
+        <!--var products = JSON.parse(response);
+        var s = '';
+					for(var i = 0; i < products.length; i++) {
+						s += 'pages title: ' + products[i] + '<br>';
+}
+					$('#listofpages').html(s);
+-->
+                }
+  });
+   }
+</script>
