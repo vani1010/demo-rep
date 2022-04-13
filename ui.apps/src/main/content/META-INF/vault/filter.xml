@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/apps/samplegit/clientlibs"/>
+    <filter root="/apps/samplegit/components"/>
+    <filter root="/apps/samplegit/i18n"/>
+</workspaceFilter>
